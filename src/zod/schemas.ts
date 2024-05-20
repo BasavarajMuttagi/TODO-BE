@@ -25,4 +25,18 @@ const userSignUpSchema = z.object({
 
 type userSignUpType = z.infer<typeof userSignUpSchema>;
 
-export { userLoginSchema, userSignUpSchema, userLoginType, userSignUpType };
+const createTodoSchema = z.object({
+  label: z.string(),
+  description: z.string(),
+});
+
+type createTodoType = z.infer<typeof createTodoSchema>;
+
+export {
+  userLoginSchema,
+  userSignUpSchema,
+  createTodoSchema,
+  userLoginType,
+  userSignUpType,
+  createTodoType,
+};

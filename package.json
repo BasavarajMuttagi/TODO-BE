@@ -11,7 +11,7 @@
     "prettier": "prettier --check \"**/*.{js,ts,jsx,tsx,json,css,scss,md}\"",
     "format": "prettier --write \"**/*.{js,ts,jsx,tsx,json,css,scss,md}\"",
     "flow": "npm run lint && npm run prettier && npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest"
   },
   "keywords": [],
   "author": "",
@@ -36,6 +36,7 @@
     "nodemon": "^3.1.0",
     "prettier": "^3.2.5",
     "typescript": "^5.4.5",
-    "typescript-eslint": "^7.9.0"
+    "typescript-eslint": "^7.9.0",
+    "vitest": "^1.6.0"
   }
 }
