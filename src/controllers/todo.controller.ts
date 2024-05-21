@@ -22,16 +22,17 @@ const createTodo = async (req: Request, res: Response) => {
 
 const updateTodo = async (req: Request, res: Response) => {
   try {
-    const { userId } = req.body.user as tokenType;
+    const user = req.body.user as tokenType;
+    delete req.body.user;
     const { id } = req.params;
-    const { label, description, isComplete, isImportant } =
-      req.body as updateTodoType;
+    const data = req.body as updateTodoType;
     const updatedTodo = await prisma.todo.update({
-      where: { id, userId },
-      data: { label, description, isComplete, isImportant },
+      where: { id, userId: user.userId },
+      data,
     });
     res.status(200).json(updatedTodo);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "Failed to update todo" });
   }
 };
