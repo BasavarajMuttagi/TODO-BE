@@ -1,7 +1,7 @@
 import prisma from "../../prisma/PrismaClient";
 import { Request, Response } from "express";
 import { tokenType } from "../middlewares/auth.middleware";
-import { createTodoType } from "../zod/schemas";
+import { createTodoType, updateTodoType } from "../zod/schemas";
 
 const createTodo = async (req: Request, res: Response) => {
   try {
@@ -24,27 +24,15 @@ const updateTodo = async (req: Request, res: Response) => {
   try {
     const { userId } = req.body.user as tokenType;
     const { id } = req.params;
-    const data = req.body;
+    const { label, description, isComplete, isImportant } =
+      req.body as updateTodoType;
     const updatedTodo = await prisma.todo.update({
       where: { id, userId },
-      data,
+      data: { label, description, isComplete, isImportant },
     });
     res.status(200).json(updatedTodo);
   } catch (error) {
     res.status(500).json({ error: "Failed to update todo" });
-  }
-};
-
-const hardDeleteTodo = async (req: Request, res: Response) => {
-  try {
-    const { userId } = req.body.user as tokenType;
-    const { id } = req.params;
-    await prisma.todo.delete({
-      where: { id, userId },
-    });
-    res.status(200).json({ message: "Todo deleted successfully" });
-  } catch (error) {
-    res.status(500).json({ error: "Failed to delete todo" });
   }
 };
 
@@ -77,4 +65,15 @@ const getAllTodos = async (req: Request, res: Response) => {
   }
 };
 
+const hardDeleteTodo = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    await prisma.todo.delete({
+      where: { id },
+    });
+    res.status(200).json({ message: "Todo deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete todo" });
+  }
+};
 export { createTodo, updateTodo, hardDeleteTodo, getTodoById, getAllTodos };

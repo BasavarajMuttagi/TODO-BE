@@ -27,7 +27,6 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
       }
 
       req.body.user = decoded;
-      console.log(req.body.user);
       next();
     },
   );

@@ -26,17 +26,28 @@ const userSignUpSchema = z.object({
 type userSignUpType = z.infer<typeof userSignUpSchema>;
 
 const createTodoSchema = z.object({
-  label: z.string(),
+  label: z.string().min(1),
   description: z.string(),
 });
 
 type createTodoType = z.infer<typeof createTodoSchema>;
 
+const updateTodoSchema = z.object({
+  label: z.string().min(1).optional(),
+  description: z.string().optional(),
+  isComplete: z.boolean().optional(),
+  isImportant: z.boolean().optional(),
+});
+
+type updateTodoType = z.infer<typeof updateTodoSchema>;
+
 export {
   userLoginSchema,
   userSignUpSchema,
   createTodoSchema,
+  updateTodoSchema,
   userLoginType,
   userSignUpType,
   createTodoType,
+  updateTodoType,
 };

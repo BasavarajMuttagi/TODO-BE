@@ -36,7 +36,6 @@ const SignUpUser = async (req: Request, res: Response) => {
 const LoginUser = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;
-    console.log(email, password);
     const User = await prisma.user.findUnique({
       where: {
         email,
@@ -55,7 +54,6 @@ const LoginUser = async (req: Request, res: Response) => {
       res.status(400).send({ message: "email or password incorrect" });
       return;
     }
-    console.log(DB_SECRET);
     const token = sign(
       {
         userId: User.id,
@@ -73,7 +71,6 @@ const LoginUser = async (req: Request, res: Response) => {
       message: "success",
     });
   } catch (error) {
-    console.log(error);
     res.status(500).send({ message: "Error Occured , Please Try Again!" });
   }
 };
