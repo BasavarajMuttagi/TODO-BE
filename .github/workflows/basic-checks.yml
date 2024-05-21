@@ -33,11 +33,5 @@ jobs:
       - name: Run Build Check
         run: npm run build
 
-      - name: Set up environment variables
-        run:
-          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> $GITHUB_ENV
-          echo "DB_SECRET=${{ secrets.DB_SECRET }}" >> $GITHUB_ENV
-        shell: bash
-
       - name: Run Integration Tests
         run: npm run test
