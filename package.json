@@ -8,7 +8,7 @@
     "build": "npx tsc",
     "start": "node dist/index.js",
     "lint": "eslint .",
-    "postinstall": "prisma generate --no-engine",
+    "postinstall": "prisma generate",
     "prettier": "prettier --check \"**/*.{js,ts,jsx,tsx,json,css,scss,md}\"",
     "format": "prettier --write \"**/*.{js,ts,jsx,tsx,json,css,scss,md}\"",
     "flow": "npm run lint && npm run prettier && npm run build",
