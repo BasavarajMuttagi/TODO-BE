@@ -34,4 +34,4 @@ jobs:
         run: npm run build
 
       - name: Run Integration Tests
-        run: npm run test
+        run: "DATABASE_URL=${{ env.DATABASE_URL }} DB_SECRET=${{ env.DB_SECRET }} npm run test"
