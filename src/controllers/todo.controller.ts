@@ -59,6 +59,7 @@ const getAllTodos = async (req: Request, res: Response) => {
     const { userId } = req.body.user as tokenType;
     const todos = await prisma.todo.findMany({
       where: { userId },
+      orderBy: { createdAt: "asc" },
     });
     res.status(200).json(todos);
   } catch (error) {
